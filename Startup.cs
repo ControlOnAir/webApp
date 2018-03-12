@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace controlonair
 {
@@ -23,7 +24,8 @@ namespace controlonair
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.Use(async (context, next) => {
+            app.Use(async (context, next) =>
+            {
                 await next();
                 if (context.Response.StatusCode == 404 &&
                    !Path.HasExtension(context.Request.Path.Value) &&
@@ -35,7 +37,12 @@ namespace controlonair
             });
             app.UseMvcWithDefaultRoute();
             app.UseDefaultFiles();
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "www")),
+                RequestPath = ""
+            });
         }
     }
 
