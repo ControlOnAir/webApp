@@ -12,7 +12,7 @@
     <ion-item *ngFor="let item of messageProvider.GetDiscussionList()">
       <ion-avatar item-start>
           <div class="avatar-circle">
-              <span class="initials">{{ item.name[0] }}</span>
+              <span class="initials">{{ GetInitials(item.name) }}</span>
           </div>
       </ion-avatar>
       <h2>{{ item.name}}</h2>

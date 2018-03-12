@@ -14,4 +14,8 @@ export class MessageListPage {
 
   ionViewDidLoad() {
   }
+
+  public GetInitials(name: string): string {
+    return name[0] + name.slice(-1);
+  }
 }
