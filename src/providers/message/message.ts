@@ -1,5 +1,7 @@
+import { MessageBubble } from './../../models/MessageBubble';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { List } from "linqts";
 
 @Injectable()
 export class MessageProvider {
@@ -10,5 +12,11 @@ export class MessageProvider {
 
   public GetDiscussionList(paging: number) {
     return [{name: "john",messages: ["lol","test"]},{name: "ricardo", messages: ["test2","U NOE DA WAE"]}];
+  }
+
+  public GetDiscutionMessages(discussionId: number) {
+    let fResult: List<MessageBubble> = new List<MessageBubble>();
+    
+    return [];
   }
 }
