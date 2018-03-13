@@ -16,7 +16,8 @@ export class MessageProvider {
 
   public GetDiscutionMessages(discussionId: number) {
     let fResult: List<MessageBubble> = new List<MessageBubble>();
-    
-    return [];
+    fResult.Add(new MessageBubble("","left","coucou !","roger","10:00"));
+    fResult.Add(new MessageBubble("","right","hey quoi de neuf ?","","10:04"));
+    return fResult.ToArray();
   }
 }

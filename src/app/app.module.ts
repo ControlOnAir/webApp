@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../components/components.module';
 import { MessageListPage } from './../pages/message-list/message-list';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MessageProvider } from '../providers/message/message';
 import { ContactProvider } from '../providers/contact/contact';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { ContactProvider } from '../providers/contact/contact';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    ComponentsModule,
+    HttpModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -2,7 +2,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of messageProvider.GetDiscussionList()">
+    <ion-item *ngFor="let item of messageProvider.GetDiscussionList()" (tap)="OpenMessages(0)">
       <ion-avatar item-start>
           <div class="avatar-circle">
               <span class="initials">{{ GetInitials(item.name) }}</span>

@@ -20,4 +20,8 @@ export class DiscussionListPage {
     return name[0] + name.slice(-1);
   }
 
+  public OpenMessages(id: number) {
+    this.navCtrl.push("MessageListPage");
+  }
+
 }
