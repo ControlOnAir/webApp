@@ -1,3 +1,4 @@
+import { DiscussionListPage } from './../pages/discussion-list/discussion-list';
 import { ComponentsModule } from './../components/components.module';
 import { MessageListPage } from './../pages/message-list/message-list';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,7 +16,8 @@ import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     MyApp,
-    MessageListPage
+    MessageListPage,
+    DiscussionListPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { HttpModule } from '@angular/http';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    MessageListPage
+    MessageListPage,
+    DiscussionListPage
   ],
   providers: [
     StatusBar,

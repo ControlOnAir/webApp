@@ -1,9 +1,9 @@
+import { DiscussionListPage } from './../pages/discussion-list/discussion-list';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { MessageListPage } from './../pages/message-list/message-list';
 
 @Component({
   templateUrl: 'app.html'
@@ -11,7 +11,7 @@ import { MessageListPage } from './../pages/message-list/message-list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = MessageListPage;
+  rootPage: any = DiscussionListPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -20,7 +20,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Messages', component: MessageListPage}
+      { title: 'Messages', component: DiscussionListPage}
     ];
 
   }

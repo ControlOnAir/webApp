@@ -11,5 +11,13 @@ export class ChatBubbleComponent {
 
   constructor() {
   }
+  
+  ngOnInit() {
+    if(this.msg.senderName === "") this.msg.senderName = "Moi";
+  }
+
+  public GetInitials(): string {
+    return this.msg.senderName[0] + this.msg.senderName.slice(-1);
+  }
 
 }
