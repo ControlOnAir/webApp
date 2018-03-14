@@ -9,6 +9,7 @@ import { ComponentsModule } from '../../components/components.module';
   ],
   imports: [
     IonicPageModule.forChild(MessageListPage),
+    ComponentsModule    
   ],
   exports: [
     MessageListPage

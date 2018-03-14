@@ -15,21 +15,16 @@ import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
-    MyApp,
-    MessageListPage,
-    DiscussionListPage
+    MyApp
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    ComponentsModule,
     HttpModule    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    MessageListPage,
-    DiscussionListPage
+    MyApp
   ],
   providers: [
     StatusBar,

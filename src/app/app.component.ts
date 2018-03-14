@@ -11,7 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = DiscussionListPage;
+  rootPage: any = "DiscussionListPage";
 
   pages: Array<{title: string, component: any}>;
 
@@ -20,7 +20,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Messages', component: DiscussionListPage}
+      { title: 'Messages', component: "DiscussionListPage"}
     ];
 
   }
@@ -29,8 +29,8 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      //this.statusBar.styleDefault();
+      //this.splashScreen.hide();
     });
   }
 

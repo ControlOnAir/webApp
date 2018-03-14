@@ -1,3 +1,5 @@
+import { ComponentsModule } from './../../components/components.module';
+import { ChatBubbleComponent } from './../../components/chat-bubble/chat-bubble';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { DiscussionListPage } from './discussion-list';
@@ -9,5 +11,8 @@ import { DiscussionListPage } from './discussion-list';
   imports: [
     IonicPageModule.forChild(DiscussionListPage),
   ],
+  exports: [
+    DiscussionListPage
+  ]
 })
 export class DiscussionListPageModule {}
