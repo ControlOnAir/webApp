@@ -5,7 +5,18 @@
     </button>
     <ion-title>Liste des contacts</ion-title>
   </ion-navbar>
+  <form>
+    <ion-searchbar #focusTb placeholder="Rechercher" [(ngModel)]="filter" [formControl]="searchControl" [showCancelButton]="shouldShowCancel"
+      (ionCancel)="onSearchCancel($event)">
+    </ion-searchbar>
+  </form>
+  <ion-spinner *ngIf="searching" class="spinnerInside"></ion-spinner>
 </ion-header>
 
 <ion-content padding>
+    <ion-fab bottom left class='fabAdd'>
+        <button ion-fab mini (click)="AddContact()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
 </ion-content>
