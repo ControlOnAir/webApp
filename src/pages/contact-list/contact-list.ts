@@ -35,4 +35,8 @@ export class ContactListPage {
   public AddContact() {
     
   }
+
+  public ContactClicked(item) {
+    this.navCtrl.push("ContactDetailsPage",{contact: item});
+  } 
 }

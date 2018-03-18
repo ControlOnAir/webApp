@@ -46,3 +46,4 @@ Thumbs.db
 /obj
 /bin
 .sourcemaps
+package-lock.json
