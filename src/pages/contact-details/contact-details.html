@@ -8,4 +8,14 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Nom</ion-label>
+      <ion-input [(ngModel)]="contactShown.Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Numéro de portable</ion-label>
+      <ion-input type="tel" [(ngModel)]="contactShown.Phonenumber"></ion-input>
+    </ion-item>
+  </ion-list>
 </ion-content>

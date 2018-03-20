@@ -33,7 +33,7 @@ export class ContactListPage {
   }    
 
   public AddContact() {
-    
+    this.navCtrl.push("ContactDetailsPage",{contact: null});
   }
 
   public ContactClicked(item) {
