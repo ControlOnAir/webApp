@@ -14,9 +14,17 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-fab bottom left class='fabAdd'>
-        <button ion-fab mini (click)="AddContact()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-fab>
+  <ion-fab bottom left class='fabAdd'>
+    <button ion-fab mini (click)="AddContact()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-list>
+    <ion-item *ngFor="let item of contactProvider.contactListData$ | async">
+      <p>{{ item.Name }}</p>
+    </ion-item>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
 </ion-content>
