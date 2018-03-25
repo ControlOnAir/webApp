@@ -9,9 +9,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MessageListPage {
 
+  public page: number;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
+    this.page = 0;
   }
 
   ionViewDidLoad() {
+    this.messageProvider.GetDiscutionMessages(0)
   }
 }

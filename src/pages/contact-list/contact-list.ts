@@ -25,7 +25,7 @@ export class ContactListPage {
   }
   
   ionViewDidLoad() {
-    this.contactProvider.LoadContactListWithPaging("", 0);
+    this.contactProvider.LoadContactListWithPaging("", this.page);
     //we wait for no change in the last 500ms to execute result filter
     this.searchControl.valueChanges.debounceTime(500).subscribe((search) => {
       this.contactProvider.LoadContactListWithPaging(this.filter, this.page);
@@ -33,7 +33,9 @@ export class ContactListPage {
   }
 
   public onSearchCancel(event) {
-
+    this.filter = "";
+    this.page = 0;
+    this.contactProvider.LoadContactListWithPaging(this.filter, this.page);
   }
 
   public AddContact() {
