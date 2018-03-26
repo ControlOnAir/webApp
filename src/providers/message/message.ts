@@ -14,12 +14,17 @@ export class MessageProvider {
   public discussionMessages$: Observable<MessageBubble[]>;
   public discussionMessages: Subject<MessageBubble[]>;
 
+  //used for mocking purpose only
+  private fresult: MessageBubble[];
+
   constructor(public http: Http) {
     this.discussionListData = new Subject();
     this.discussionMessages = new Subject();
 
     this.dicussionListData$ = this.discussionListData.asObservable();
     this.discussionMessages$ = this.discussionMessages.asObservable();
+
+    this.initMock();
   }
 
   public GetDiscussionList(paging: number) {
@@ -27,9 +32,21 @@ export class MessageProvider {
   }
 
   public GetDiscutionMessages(discussionId: number) {
-    let fResult = [];
-    fResult.push(new MessageBubble("","left","coucou !","roger","10:00"));
-    fResult.push(new MessageBubble("","right","hey quoi de neuf ?","","10:04"));
-    this.discussionMessages.next(fResult);
+    this.discussionMessages.next(this.fresult);
+  }
+
+  public AddNewMessage(dicussionId: Number, message: MessageBubble) {
+    this.fresult.push(message);
+  }
+
+  //we need to reorder message per date with each fetch and addition of messages 
+  reorderMessages() {
+
+  }
+
+  initMock() {
+    this.fresult = [];
+    this.fresult.push(new MessageBubble("","left","coucou !","roger","10:00"));
+    this.fresult.push(new MessageBubble("","right","hey quoi de neuf ?","","10:04"));
   }
 }
