@@ -1,3 +1,4 @@
+import { AngularFireDatabase } from 'angularfire2/database';
 import { MessageBubble } from './../../models/MessageBubble';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -17,12 +18,8 @@ export class MessageProvider {
   //used for mocking purpose only
   private fresult: MessageBubble[];
 
-  constructor(public http: Http) {
-    this.discussionListData = new Subject();
-    this.discussionMessages = new Subject();
-
-    this.dicussionListData$ = this.discussionListData.asObservable();
-    this.discussionMessages$ = this.discussionMessages.asObservable();
+  constructor(public http: Http, public afDb: AngularFireDatabase) {
+    this.discussionMessages$ = afDb.list('message').valueChanges();
 
     this.initMock();
   }
