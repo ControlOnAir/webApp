@@ -4,10 +4,10 @@
     <span class="initials">{{ GetInitials() }}</span>
   </div>
   <div class="chat-bubble {{msg.position}}">
-    <div class="message">{{msg.content}}</div>
+    <div class="message">{{bubble.content}}</div>
     <div class="message-detail">
-        <span style="font-weight:bold;">{{msg.senderName}} </span>,
-        <span>{{msg.time}}</span>
+        <span style="font-weight:bold;">{{bubble.senderName}} </span>,
+        <span>{{bubble.time}}</span>
     </div>
   </div>
 </div>

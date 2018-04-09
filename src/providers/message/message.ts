@@ -16,7 +16,7 @@ export class MessageProvider {
   public discussionMessages: Subject<MessageBubble[]>;
 
   //used for mocking purpose only
-  private fresult: MessageBubble[];
+  private fresult: MessageBubble[]; 
 
   constructor(public http: Http, public afDb: AngularFireDatabase) {
     this.discussionMessages$ = afDb.list('message').valueChanges();
