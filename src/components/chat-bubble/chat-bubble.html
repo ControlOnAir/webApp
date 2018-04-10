@@ -1,13 +1,13 @@
 <div class="chatBubble">
 
-  <div class="profile-pic {{msg.position}}">
+  <div class="profile-pic {{bubble.position}}">
     <span class="initials">{{ GetInitials() }}</span>
   </div>
-  <div class="chat-bubble {{msg.position}}">
-    <div class="message">{{bubble.content}}</div>
+  <div class="chat-bubble {{bubble.position}}">
+    <div class="message">{{bubble.message.body}}</div>
     <div class="message-detail">
-        <span style="font-weight:bold;">{{bubble.senderName}} </span>,
-        <span>{{bubble.time}}</span>
+        <span style="font-weight:bold;">{{bubble.message.author.name}} </span>,
+        <span>{{bubble.message.timestamp}}</span>
     </div>
   </div>
 </div>

@@ -16,7 +16,6 @@ export class DiscussionListPage {
   }
 
   ionViewDidLoad() {
-    this.messageProvider.GetDiscussionList(this.page);
   }
 
   public GetInitials(name: string): string {

@@ -1,6 +1,6 @@
+import { Author } from './../../models/Author';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Contact } from '../../models/Contact';
 
 @IonicPage()
 @Component({
@@ -9,7 +9,7 @@ import { Contact } from '../../models/Contact';
 })
 export class ContactDetailsPage {
 
-  public contactShown: Contact;
+  public contactShown: Author;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.contactShown = navParams.get("contact");

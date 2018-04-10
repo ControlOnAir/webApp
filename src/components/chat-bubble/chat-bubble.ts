@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { MessageBubble } from '../../models/MessageBubble';
+import { Message } from '../../models/Message';
 
 @Component({
   selector: 'chat-bubble',
@@ -16,11 +16,10 @@ export class ChatBubbleComponent {
   }
 
   ngOnInit() {
-    if(this.bubble.senderName === "") this.bubble.senderName = "Moi";
   }
 
   public GetInitials(): string {
-    return this.bubble.senderName[0] + this.bubble.senderName.slice(-1);
+    return this.bubble.message.author.name[0] + this.bubble.message.author.name.slice(-1);
   }
 
 }
