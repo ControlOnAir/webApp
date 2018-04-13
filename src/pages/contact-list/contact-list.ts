@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
 import "rxjs/add/operator/debounceTime";
 import { ContactProvider } from '../../providers/contact/contact';
+import { Author } from '../../models/Author';
 
 @IonicPage()
 @Component({
@@ -41,10 +42,6 @@ export class ContactListPage {
   public AddContact() {
     this.navCtrl.push("ContactAddPage",{contact: null});
   }
-
-  public ContactClicked(item) {
-    this.navCtrl.push("ContactDetailsPage",{contact: item});
-  } 
 
   doInfinite(event) {
     this.page++;

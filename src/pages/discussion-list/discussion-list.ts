@@ -1,6 +1,7 @@
 import { MessageProvider } from './../../providers/message/message';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Conversation } from '../../models/Conversation';
 
 @IonicPage()
 @Component({
@@ -16,14 +17,19 @@ export class DiscussionListPage {
   }
 
   ionViewDidLoad() {
+    this.messageProvider.initMock();
   }
+
 
   public GetInitials(name: string): string {
     return name[0] + name.slice(-1);
   }
 
-  public OpenMessages(id: number) {
-    this.navCtrl.push("MessageListPage");
+  public OpenMessages(item: Conversation) {
+    this.navCtrl.push("MessageListPage",{conversation: item});
   }
 
+  AddConversation() {
+
+  }
 }
