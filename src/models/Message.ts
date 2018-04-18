@@ -10,5 +10,6 @@ export class Message {
     constructor(author, body) {
         this.author = author;
         this.body = body;
+        this.timestamp = moment();
     }
 }

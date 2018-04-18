@@ -48,7 +48,7 @@ chat-bubble {
         .chat-bubble.left {
           background-color: map-get($chat-bubble, background-left);
           float: left;
-          margin-left: 30%;
+          margin-left: 20%;
         }
       
         .chat-bubble.left:before {
@@ -61,7 +61,7 @@ chat-bubble {
           background-color: map-get($chat-bubble, background-right);
           color: #000;
           float: right;
-          margin-right: 30%;
+          margin-right: 20%;
         }
       
         .chat-bubble.right:before {

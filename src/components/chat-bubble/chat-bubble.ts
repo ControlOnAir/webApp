@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MessageBubble } from '../../models/MessageBubble';
 import { Message } from '../../models/Message';
 import { Author } from '../../models/Author';
+import moment, { Moment } from "moment";
 
 @Component({
   selector: 'chat-bubble',
@@ -9,22 +10,24 @@ import { Author } from '../../models/Author';
 })
 export class ChatBubbleComponent {
 
-  @Input("message") public msg: any;
+  @Input("message") public message: any;
   public bubble: MessageBubble;
 
   constructor() {
-    console.log(this.msg);
-    if(this.msg == null) this.msg = 
-    new Message(new Author("undefined","undefined"),"undefined");
-    this.bubble = new MessageBubble("","left", this.msg);
+    
   }
 
   ngOnInit() {
+    console.log(this.message);
+    if(this.message == null) this.message = 
+    new Message(new Author("undefined","undefined"),"undefined");
+    this.bubble = new MessageBubble("","left", this.message);
+    //temporaire
+    if(this.bubble.message.timestamp == null) this.bubble.message.timestamp = moment();
   }
 
   public GetInitials(): string {
     return "lol";
     //return this.bubble.message.author.name[0] + this.bubble.message.author.name.slice(-1);
   }
-
 }
