@@ -25,7 +25,8 @@ export class MessageProvider {
   private fresult: MessageBubble[];
 
   constructor(public http: Http, public afDb: AngularFireDatabase) {
-    this.discussionMessages$ = afDb.list<Message>('message').valueChanges();
+    this.discussionMessages = afDb.list<Message>('message');
+    this.discussionMessages$ = this.discussionMessages.valueChanges();
     this.discussionMock = new Subject();
     this.dicussionListData$ = this.discussionMock.asObservable();
   }
@@ -44,6 +45,6 @@ export class MessageProvider {
   }
 
   public AddNewMessage(dicussionId: Number, message: MessageBubble) {
-    //this.discussionMessages.push()
+    this.discussionMessages.push(message.message);
   }
 }

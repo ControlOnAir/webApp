@@ -31,8 +31,7 @@ export class MessageListPage {
   }
 
   sendMessage() {
-    let date = new Date();
-    let msg = new MessageBubble("","right", new Message(new Author("alexandre","0787878787"),""));
+    let msg = new MessageBubble("","right", new Message(new Author("alexandre","0787878787"),this.messageToSend));
     this.messageProvider.AddNewMessage(0, msg);
     this.messageToSend = "";
   }

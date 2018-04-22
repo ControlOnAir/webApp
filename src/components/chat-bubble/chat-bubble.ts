@@ -14,7 +14,6 @@ export class ChatBubbleComponent {
   public bubble: MessageBubble;
 
   constructor() {
-    
   }
 
   ngOnInit() {
@@ -23,11 +22,10 @@ export class ChatBubbleComponent {
     new Message(new Author("undefined","undefined"),"undefined");
     this.bubble = new MessageBubble("","left", this.message);
     //temporaire
-    if(this.bubble.message.timestamp == null) this.bubble.message.timestamp = moment();
+    if(this.bubble.message.timestamp == null) this.bubble.message.timestamp = moment().toISOString();
   }
 
   public GetInitials(): string {
-    return "lol";
-    //return this.bubble.message.author.name[0] + this.bubble.message.author.name.slice(-1);
+    return this.bubble.message.author.name[0] + this.bubble.message.author.name.slice(-1);
   }
 }
