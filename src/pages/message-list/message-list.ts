@@ -5,6 +5,8 @@ import { MessageBubble } from '../../models/MessageBubble';
 import { Message } from '../../models/Message';
 import { Author } from '../../models/Author';
 import { Conversation } from '../../models/Conversation';
+import { DataSnapshot } from '@firebase/database-types';
+import { AngularFireAction } from 'angularfire2/database';
 
 @IonicPage()
 @Component({
@@ -16,7 +18,7 @@ export class MessageListPage {
   public page: number;
   public messageToSend: string;
   public conversation: Conversation;
-  public messages: Message[];
+  public messages: AngularFireAction<DataSnapshot>[]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
     this.page = 0;

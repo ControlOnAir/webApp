@@ -3,6 +3,8 @@ import { MessageBubble } from '../../models/MessageBubble';
 import { Message } from '../../models/Message';
 import { Author } from '../../models/Author';
 import moment, { Moment } from "moment";
+import { AngularFireAction } from 'angularfire2/database';
+import { DataSnapshot } from '@firebase/database-types';
 
 @Component({
   selector: 'chat-bubble',
@@ -10,7 +12,7 @@ import moment, { Moment } from "moment";
 })
 export class ChatBubbleComponent {
 
-  @Input("message") public message: any;
+  @Input("message") public message: AngularFireAction<DataSnapshot>;
   public bubble: MessageBubble;
 
   constructor() {
@@ -18,9 +20,7 @@ export class ChatBubbleComponent {
 
   ngOnInit() {
     console.log(this.message);
-    if(this.message == null) this.message = 
-    new Message(new Author("undefined","undefined"),"undefined");
-    this.bubble = new MessageBubble("","left", this.message);
+    this.bubble = new MessageBubble("","left", <Message>this.message.payload.toJSON());
     //temporaire
     if(this.bubble.message.timestamp == null) this.bubble.message.timestamp = moment().toISOString();
   }

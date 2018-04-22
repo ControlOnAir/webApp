@@ -1,4 +1,4 @@
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireAction } from 'angularfire2/database';
 import { MessageBubble } from './../../models/MessageBubble';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -9,6 +9,7 @@ import { Conversation } from '../../models/Conversation';
 import { Message } from '../../models/Message';
 import { Author } from '../../models/Author';
 import moment, { Moment } from "moment";
+import { DataSnapshot } from '@firebase/database-types';
 
 @Injectable()
 export class MessageProvider {
@@ -16,7 +17,7 @@ export class MessageProvider {
   public dicussionListData$: Observable<Conversation[]>;
   private discussionListData: AngularFireList<Conversation>;
 
-  public discussionMessages$: Observable<Message[]>;
+  public discussionMessages$: Observable<AngularFireAction<DataSnapshot>[]>
   private discussionMessages: AngularFireList<Message>;
 
   private discussionMock: Subject<Conversation[]>;
@@ -26,7 +27,7 @@ export class MessageProvider {
 
   constructor(public http: Http, public afDb: AngularFireDatabase) {
     this.discussionMessages = afDb.list<Message>('message');
-    this.discussionMessages$ = this.discussionMessages.valueChanges();
+    this.discussionMessages$ = this.discussionMessages.snapshotChanges();
     this.discussionMock = new Subject();
     this.dicussionListData$ = this.discussionMock.asObservable();
   }
