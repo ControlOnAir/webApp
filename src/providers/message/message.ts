@@ -24,12 +24,17 @@ export class MessageProvider {
   //used for mocking purpose only
   private fresult: MessageBubble[];
 
-  constructor(public http: Http, public afDb: AngularFireDatabase) {
+  constructor(public afDb: AngularFireDatabase) {
     this.discussionMessages = afDb.list<Message>('0781431934/data/messages');
     this.discussionMessages$ = this.discussionMessages.snapshotChanges();
 
     this.discussionListData = afDb.list<any>('0781431934/data/conversations');
     this.dicussionListData$ = this.discussionListData.snapshotChanges();
+  }
+
+  public loadMessages(number: string) {
+    this.discussionMessages = this.afDb.list<Message>('0781431934/data/messages/' + number);
+    this.discussionMessages$ = this.discussionMessages.snapshotChanges();
   }
   
 

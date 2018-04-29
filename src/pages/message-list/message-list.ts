@@ -17,16 +17,17 @@ export class MessageListPage {
 
   public page: number;
   public messageToSend: string;
-  public conversation: Conversation;
+  public conversation: AngularFireAction<DataSnapshot>;
   public messages: AngularFireAction<DataSnapshot>[]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
     this.page = 0;
     this.conversation = navParams.get("conversation");
+    if(this.conversation == null) this.navCtrl.pop();
+    this.messageProvider.loadMessages(this.conversation.key);
     this.messageProvider.discussionMessages$.subscribe(data => {
       console.log(data);
       this.messages = data;
-      data.forEach(x => console.log(x.key));
     });
   }
 

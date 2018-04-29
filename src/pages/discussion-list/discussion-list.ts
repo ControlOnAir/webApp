@@ -1,3 +1,5 @@
+import { Author } from './../../models/Author';
+import { ContactProvider } from './../../providers/contact/contact';
 import { AngularFireAction } from 'angularfire2/database';
 import { DataSnapshot } from '@firebase/database-types';
 import { MessageProvider } from './../../providers/message/message';
@@ -14,7 +16,8 @@ export class DiscussionListPage {
 
   public page: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+     public messageProvider: MessageProvider, public contactProvider: ContactProvider) {
     this.page = 0;
   }
 
@@ -25,6 +28,11 @@ export class DiscussionListPage {
   public GetInitials(item: AngularFireAction<DataSnapshot>): string {
     let data = <Conversation>item.payload.toJSON();
     // return name[0] + name.slice(-1);
+    // this.contactProvider.GetOneContact<Author>("0781431934/data/" + item.key).subscribe(
+    //   data => {
+    //     return data.name[0] + data.name.slice(-1);
+    //   }
+    // )
     return item.key;
   }
 
