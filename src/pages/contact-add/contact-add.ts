@@ -18,4 +18,8 @@ export class ContactAddPage {
   ionViewDidLoad() {
     
   }
+
+  AddContact() {
+    
+  }
 }

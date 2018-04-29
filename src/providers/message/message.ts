@@ -14,38 +14,27 @@ import { DataSnapshot } from '@firebase/database-types';
 @Injectable()
 export class MessageProvider {
 
-  public dicussionListData$: Observable<Conversation[]>;
+  public dicussionListData$: Observable<AngularFireAction<DataSnapshot>[]>
   private discussionListData: AngularFireList<Conversation>;
 
   public discussionMessages$: Observable<AngularFireAction<DataSnapshot>[]>
   private discussionMessages: AngularFireList<Message>;
 
-  private discussionMock: Subject<Conversation[]>;
 
   //used for mocking purpose only
   private fresult: MessageBubble[];
 
   constructor(public http: Http, public afDb: AngularFireDatabase) {
-    this.discussionMessages = afDb.list<Message>('message');
+    this.discussionMessages = afDb.list<Message>('0781431934/data/messages');
     this.discussionMessages$ = this.discussionMessages.snapshotChanges();
-    this.discussionMock = new Subject();
-    this.dicussionListData$ = this.discussionMock.asObservable();
+
+    this.discussionListData = afDb.list<any>('0781431934/data/conversations');
+    this.dicussionListData$ = this.discussionListData.snapshotChanges();
   }
   
-  public initMock() {
-    let values = [];
-    let author1 = new Author("me","0102030405");
-    let author2 = new Author("john","0402030405");
-    let mess = new Message(author1,"lol");
-    let conv = new Conversation(author2);
-    conv.messages.push(mess);
-    conv.id = 0;
-    values.push(conv);
-    this.discussionMock.next(values);
-    return values;
-  }
 
   public AddNewMessage(dicussionId: Number, message: MessageBubble) {
     this.discussionMessages.push(message.message);
+    
   }
 }

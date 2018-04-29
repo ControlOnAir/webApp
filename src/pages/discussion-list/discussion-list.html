@@ -17,11 +17,11 @@
     <ion-item *ngFor="let item of messageProvider.dicussionListData$ | async" (tap)="OpenMessages(item)">
       <ion-avatar item-start>
         <div class="avatar-circle">
-          <span class="initials">{{ GetInitials(item.contact.name) }}</span>
+          <span class="initials">{{ GetInitials(item) }}</span>
         </div>
       </ion-avatar>
-      <h2>{{ item.contact.name}}</h2>
-      <p>{{ item.messages[0].body }}</p>
+      <h2>{{ GetName(item.payload) }}</h2>
+      <p>{{ GetContent(item.payload) }}</p>
     </ion-item>
   </ion-list>
 </ion-content>

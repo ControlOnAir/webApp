@@ -1,3 +1,5 @@
+import { AngularFireAction } from 'angularfire2/database';
+import { DataSnapshot } from '@firebase/database-types';
 import { MessageProvider } from './../../providers/message/message';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -17,17 +19,28 @@ export class DiscussionListPage {
   }
 
   ionViewDidLoad() {
-    this.messageProvider.initMock();
   }
 
 
-  public GetInitials(name: string): string {
-    return name[0] + name.slice(-1);
+  public GetInitials(item: AngularFireAction<DataSnapshot>): string {
+    let data = <Conversation>item.payload.toJSON();
+    // return name[0] + name.slice(-1);
+    return item.key;
   }
 
   public OpenMessages(item: Conversation) {
     this.navCtrl.push("MessageListPage",{conversation: item});
   }
+
+  public GetName(item: DataSnapshot) {
+    let conv = <Conversation>item.toJSON();
+    return "TESTING";
+  }
+
+  public GetContent(item: DataSnapshot) {
+      return (<Conversation>item.toJSON()).lastMessage;
+  }
+
 
   AddConversation() {
 

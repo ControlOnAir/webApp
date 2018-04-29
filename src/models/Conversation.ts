@@ -3,15 +3,14 @@ import { Author } from './Author';
 import moment, { Moment } from "moment";
 
 export class Conversation {
+    //id = phone number
     public id: number;
-    public messages: Message[];
-    public contact: Author;
     public timestamp: Moment;
+    public lastMessage: string;
 
-    constructor(contact: Author) {
+    constructor() {
         this.id = -1;
-        this.messages = [];
         this.timestamp = moment();
-        this.contact = contact;
+        this.lastMessage = "";
     }
 }

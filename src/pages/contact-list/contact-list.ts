@@ -26,17 +26,15 @@ export class ContactListPage {
   }
   
   ionViewDidLoad() {
-    this.contactProvider.LoadContactListWithPaging("", this.page);
     //we wait for no change in the last 500ms to execute result filter
     this.searchControl.valueChanges.debounceTime(500).subscribe((search) => {
-      this.contactProvider.LoadContactListWithPaging(this.filter, this.page);
+      //need to implement correct search filtering
     });
   }
 
   public onSearchCancel(event) {
     this.filter = "";
     this.page = 0;
-    this.contactProvider.LoadContactListWithPaging(this.filter, this.page);
   }
 
   public AddContact() {
@@ -45,6 +43,5 @@ export class ContactListPage {
 
   doInfinite(event) {
     this.page++;
-    this.contactProvider.LoadContactListWithPaging(this.filter,this.page);
   }
 }

@@ -26,6 +26,7 @@ export class MessageListPage {
     this.messageProvider.discussionMessages$.subscribe(data => {
       console.log(data);
       this.messages = data;
+      data.forEach(x => console.log(x.key));
     });
   }
 
