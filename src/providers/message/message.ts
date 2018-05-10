@@ -17,7 +17,7 @@ export class MessageProvider {
   public dicussionListData$: Observable<AngularFireAction<DataSnapshot>[]>
   private discussionListData: AngularFireList<Conversation>;
 
-  public discussionMessages$: Observable<AngularFireAction<DataSnapshot>[]>
+  public discussionMessages$: Observable<Message[]>;
   private discussionMessages: AngularFireList<Message>;
 
 
@@ -26,7 +26,7 @@ export class MessageProvider {
 
   constructor(public afDb: AngularFireDatabase) {
     this.discussionMessages = afDb.list<Message>('0781431934/data/messages');
-    this.discussionMessages$ = this.discussionMessages.snapshotChanges();
+    this.discussionMessages$ = this.discussionMessages.valueChanges();
 
     this.discussionListData = afDb.list<any>('0781431934/data/conversations');
     this.dicussionListData$ = this.discussionListData.snapshotChanges();
@@ -34,7 +34,12 @@ export class MessageProvider {
 
   public loadMessages(number: string) {
     this.discussionMessages = this.afDb.list<Message>('0781431934/data/messages/' + number);
-    this.discussionMessages$ = this.discussionMessages.snapshotChanges();
+    this.discussionMessages$ = this.discussionMessages.valueChanges();
+  }
+
+  public GetConversationContact(number: string) {
+    let res = this.afDb.object<any>("0781431934/data/contacts/" + number);
+    return res.snapshotChanges(); 
   }
   
 

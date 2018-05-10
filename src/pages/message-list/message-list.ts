@@ -18,13 +18,15 @@ export class MessageListPage {
   public page: number;
   public messageToSend: string;
   public conversation: AngularFireAction<DataSnapshot>;
-  public messages: AngularFireAction<DataSnapshot>[]
+  public messages: Message[]
+  public convId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
     this.page = 0;
     this.conversation = navParams.get("conversation");
     if(this.conversation == null) this.navCtrl.pop();
     this.messageProvider.loadMessages(this.conversation.key);
+    this.convId = this.conversation.key;
     this.messageProvider.discussionMessages$.subscribe(data => {
       console.log(data);
       this.messages = data;
@@ -35,7 +37,7 @@ export class MessageListPage {
   }
 
   sendMessage() {
-    let msg = new MessageBubble("","right", new Message(new Author("alexandre","0787878787"),this.messageToSend));
+    let msg = new MessageBubble("","right", new Message("moi",this.messageToSend));
     this.messageProvider.AddNewMessage(0, msg);
     this.messageToSend = "";
   }

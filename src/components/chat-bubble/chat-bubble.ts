@@ -12,7 +12,8 @@ import { DataSnapshot } from '@firebase/database-types';
 })
 export class ChatBubbleComponent {
 
-  @Input("message") public message: AngularFireAction<DataSnapshot>;
+  @Input("message") public message: Message;
+  @Input("conversationId") public convId: string
   public bubble: MessageBubble;
 
   constructor() {
@@ -20,12 +21,14 @@ export class ChatBubbleComponent {
 
   ngOnInit() {
     console.log(this.message);
-    this.bubble = new MessageBubble("","left", <Message>this.message.payload.toJSON());
+    let direction = "left";
+    if(this.message.author == "moi") direction = "right";
+    this.bubble = new MessageBubble("",direction, this.message);
     //temporaire
     if(this.bubble.message.timestamp == null) this.bubble.message.timestamp = moment().toISOString();
   }
 
   public GetInitials(): string {
-    return this.bubble.message.author.name[0] + this.bubble.message.author.name.slice(-1);
+    return this.bubble.message.author[0] + this.bubble.message.author.slice(-1);
   }
 }
