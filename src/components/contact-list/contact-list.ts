@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Author } from '../../models/Author';
 import { ContactProvider } from '../../providers/contact/contact';
+import { AngularFireAction } from 'angularfire2/database';
+import { DataSnapshot } from '@firebase/database-types';
 
 @Component({
   selector: 'contact-list',
@@ -19,6 +21,10 @@ export class ContactListComponent {
 
   ContactClicked(item: Author) {
 
+  }
+
+  GetName(item: AngularFireAction<DataSnapshot>): string {
+    return item.payload.toJSON()["name"];
   }
 
   doInfinite(event) {
