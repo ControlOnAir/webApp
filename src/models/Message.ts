@@ -10,6 +10,6 @@ export class Message {
     constructor(author, body) {
         this.author = author;
         this.body = body;
-        this.timestamp = moment().toISOString();
+        this.timestamp = moment().format("HH:mm dd/MM/YYYY");
     }
 }

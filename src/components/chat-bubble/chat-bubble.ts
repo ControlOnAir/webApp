@@ -25,7 +25,7 @@ export class ChatBubbleComponent {
     if(this.message.author == "moi") direction = "right";
     this.bubble = new MessageBubble("",direction, this.message);
     //temporaire
-    if(this.bubble.message.timestamp == null) this.bubble.message.timestamp = moment().toISOString();
+    if(this.bubble.message.timestamp == null) this.bubble.message.timestamp = moment().format("HH:mm dd/MM/YYYY");
   }
 
   public GetInitials(): string {

@@ -1,7 +1,7 @@
 <ion-list>
-  <ion-item *ngFor="let item of contactProvider.contactListData$ | async" (click)="ContactClicked(item)">
-    <p>{{ item.name }}</p>
-    <p>{{ item.number }}</p>
+  <ion-item *ngFor="let item of contactProvider.contactList$ | async" (click)="ContactClicked(item)">
+    <p>{{ item.payload.toJSON().name }}</p>
+    <p>{{ item.key }}</p>
   </ion-item>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
