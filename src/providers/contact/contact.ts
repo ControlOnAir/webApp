@@ -20,4 +20,8 @@ export class ContactProvider {
   GetOneContact<T>(number: string) {
     return this.afDb.object<T>(number).valueChanges();
   }
+
+  AddContact(num: string,name: string) {
+    return this.afDb.object('0781431934/data/contacts/' + num + '/').set({name: name});
+  }
 }
