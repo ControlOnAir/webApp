@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { Author } from './../../models/Author';
 import { ContactProvider } from './../../providers/contact/contact';
 import { AngularFireAction } from 'angularfire2/database';
@@ -17,7 +18,7 @@ export class DiscussionListPage {
   public page: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-     public messageProvider: MessageProvider, public contactProvider: ContactProvider) {
+    public messageProvider: MessageProvider, public contactProvider: ContactProvider) {
     this.page = 0;
   }
 
@@ -25,19 +26,20 @@ export class DiscussionListPage {
   }
 
 
-  public GetInitials(item: AngularFireAction<DataSnapshot>): string {
+  public GetInitials(item: AngularFireAction<DataSnapshot>): Observable<any> {
     let data = <Conversation>item.payload.toJSON();
-    // return name[0] + name.slice(-1);
-    // this.contactProvider.GetOneContact<Author>("0781431934/data/" + item.key).subscribe(
-    //   data => {
-    //     return data.name[0] + data.name.slice(-1);
-    //   }
-    // )
-    return item.key;
+    return new Observable(observer => {
+      this.contactProvider.GetOneContact<Author>("0781431934/data/contacts/" + item.key).subscribe(
+        data => {
+          observer.next(data.name[0] + data.name.slice(-1));
+          observer.complete();
+        }
+      )
+    });
   }
 
   public OpenMessages(item: Conversation) {
-    this.navCtrl.push("MessageListPage",{conversation: item});
+    this.navCtrl.push("MessageListPage", { conversation: item });
   }
 
   public GetName(item: DataSnapshot) {
@@ -46,7 +48,7 @@ export class DiscussionListPage {
   }
 
   public GetContent(item: DataSnapshot) {
-      return (<Conversation>item.toJSON()).lastMessage;
+    return (<Conversation>item.toJSON()).lastMessage;
   }
 
 

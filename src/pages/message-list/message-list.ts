@@ -28,7 +28,6 @@ export class MessageListPage {
     this.messageProvider.loadMessages(this.conversation.key);
     this.convId = this.conversation.key;
     this.messageProvider.discussionMessages$.subscribe(data => {
-      console.log(data);
       this.messages = data;
     });
   }

@@ -20,7 +20,6 @@ export class ChatBubbleComponent {
   }
 
   ngOnInit() {
-    console.log(this.message);
     let direction = "left";
     if(this.message.author == "moi") direction = "right";
     this.bubble = new MessageBubble("",direction, this.message);

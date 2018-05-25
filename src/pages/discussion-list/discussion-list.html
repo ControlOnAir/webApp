@@ -17,7 +17,7 @@
     <ion-item *ngFor="let item of messageProvider.dicussionListData$ | async" (tap)="OpenMessages(item)">
       <ion-avatar item-start>
         <div class="avatar-circle">
-          <span class="initials">{{ GetInitials(item) }}</span>
+          <span class="initials">{{ GetInitials(item) | async }}</span>
         </div>
       </ion-avatar>
       <h2>{{ GetName(item.payload) }}</h2>
