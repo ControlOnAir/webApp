@@ -2,7 +2,7 @@ import { Author } from './Author';
 import moment, { Moment } from "moment";
 
 export class Message {
-    public id: number;
+    public id: string;
     public author: string;
     public body: string;
     public timestamp: string;

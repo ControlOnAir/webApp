@@ -7,6 +7,7 @@ import { MessageProvider } from './../../providers/message/message';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Conversation } from '../../models/Conversation';
+import { Subject } from 'rxjs/Subject';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,8 @@ import { Conversation } from '../../models/Conversation';
 export class DiscussionListPage {
 
   public page: number;
+
+  public callBack: Subject<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public messageProvider: MessageProvider, public contactProvider: ContactProvider) {
@@ -53,6 +56,6 @@ export class DiscussionListPage {
 
 
   AddConversation() {
-
+    this.navCtrl.push("ContactListPage",{subject: this.callBack});
   }
 }

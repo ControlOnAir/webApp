@@ -4,12 +4,12 @@ import moment, { Moment } from "moment";
 
 export class Conversation {
     //id = phone number
-    public id: number;
+    public id: string;
     public timestamp: Moment;
     public lastMessage: string;
 
     constructor() {
-        this.id = -1;
+        this.id = "";
         this.timestamp = moment();
         this.lastMessage = "";
     }

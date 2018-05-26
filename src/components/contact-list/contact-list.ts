@@ -9,7 +9,9 @@ import { DataSnapshot } from '@firebase/database-types';
   templateUrl: 'contact-list.html'
 })
 export class ContactListComponent {
-  @Input() ItemClick: (item: Author) => void;
+  @Input() ItemClick: (item: AngularFireAction<DataSnapshot>) => void;
+
+  //currently not used, will be when filtering will be implemented
   @Input() Provider: (filter: string, page: number) => void;
 
   public page: number;
@@ -19,8 +21,8 @@ export class ContactListComponent {
 
   }
 
-  ContactClicked(item: Author) {
-
+  ContactClicked(item: AngularFireAction<DataSnapshot>) {
+    this.ItemClick(item);
   }
 
   GetName(item: AngularFireAction<DataSnapshot>): string {

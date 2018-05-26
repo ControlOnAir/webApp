@@ -37,7 +37,7 @@ export class MessageListPage {
 
   sendMessage() {
     let msg = new MessageBubble("","right", new Message("moi",this.messageToSend));
-    this.messageProvider.AddNewMessage(0, msg);
+    this.messageProvider.AddNewMessage(0, msg.message);
     this.messageToSend = "";
   }
 }

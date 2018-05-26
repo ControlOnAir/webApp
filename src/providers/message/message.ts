@@ -1,3 +1,4 @@
+import { Author } from './../../models/Author';
 import { AngularFireDatabase, AngularFireList, AngularFireAction } from 'angularfire2/database';
 import { MessageBubble } from './../../models/MessageBubble';
 import { Http } from '@angular/http';
@@ -7,14 +8,13 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Conversation } from '../../models/Conversation';
 import { Message } from '../../models/Message';
-import { Author } from '../../models/Author';
 import moment, { Moment } from "moment";
 import { DataSnapshot } from '@firebase/database-types';
 
 @Injectable()
 export class MessageProvider {
 
-  public dicussionListData$: Observable<AngularFireAction<DataSnapshot>[]>
+  public dicussionListData$: Observable<Conversation[]>
   private discussionListData: AngularFireList<Conversation>;
 
   public discussionMessages$: Observable<Message[]>;
@@ -29,7 +29,17 @@ export class MessageProvider {
     this.discussionMessages$ = this.discussionMessages.valueChanges();
 
     this.discussionListData = afDb.list<any>('0781431934/data/conversations');
-    this.dicussionListData$ = this.discussionListData.snapshotChanges();
+    this.dicussionListData$ = this.discussionListData.snapshotChanges().map(data => {
+      let convlist = new List<Conversation>();
+      data.forEach(datasnap => {
+        let newconv = new Conversation();
+        newconv.lastMessage = datasnap.payload["lastMessage"];
+        newconv.timestamp = datasnap.payload["timestamp"];
+        newconv.id = datasnap.key;
+        convlist.Add(newconv);
+      });
+      return convlist.ToArray();
+    })
   }
 
   public loadMessages(number: string) {
@@ -37,14 +47,18 @@ export class MessageProvider {
     this.discussionMessages$ = this.discussionMessages.valueChanges();
   }
 
-  public GetConversationContact(number: string) {
+  public GetConversationContact(number: string): Observable<Author> {
     let res = this.afDb.object<any>("0781431934/data/contacts/" + number);
-    return res.snapshotChanges(); 
+    return res.snapshotChanges().map(data => {
+      let contact = new Author(data.payload["name"],data.payload["number"]);
+      contact.id = data.key;
+      return contact;
+    }); 
   }
   
 
-  public AddNewMessage(dicussionId: Number, message: MessageBubble) {
-    this.discussionMessages.push(message.message);
+  public AddNewMessage(dicussionId: Number, message: Message) {
+    this.discussionMessages.push(message);
     
   }
 }
