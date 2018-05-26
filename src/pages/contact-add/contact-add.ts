@@ -21,7 +21,9 @@ export class ContactAddPage {
   }
 
   AddContact() {
-    this.contactProvider.AddContact(this.newContact.number, this.newContact.name).then(data => {
+    let newAuthor = new Author(this.newContact.name, this.newContact.number);
+    newAuthor.id = this.newContact.number;
+    this.contactProvider.AddContact(newAuthor).then(data => {
       this.navCtrl.pop();
     }).catch(ex => {
       //need to display a proper toast

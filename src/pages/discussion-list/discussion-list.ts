@@ -29,10 +29,9 @@ export class DiscussionListPage {
   }
 
 
-  public GetInitials(item: AngularFireAction<DataSnapshot>): Observable<any> {
-    let data = <Conversation>item.payload.toJSON();
+  public GetInitials(item: Conversation): Observable<any> {
     return new Observable(observer => {
-      this.contactProvider.GetOneContact<Author>("0781431934/data/contacts/" + item.key).subscribe(
+      this.contactProvider.GetOneContact<Author>("0781431934/data/contacts/" + item.id).subscribe(
         data => {
           observer.next(data.name[0] + data.name.slice(-1));
           observer.complete();
@@ -40,20 +39,22 @@ export class DiscussionListPage {
       )
     });
   }
+  
+  public GetContactName(item: Conversation): Observable<any> {
+    return new Observable(observer => {
+      this.contactProvider.GetOneContact<Author>("0781431934/data/contacts/" + item.id).subscribe(
+        data => {
+          observer.next(data.name);
+          observer.complete();
+        }
+      )
+    });
+  }
+
 
   public OpenMessages(item: Conversation) {
     this.navCtrl.push("MessageListPage", { conversation: item });
   }
-
-  public GetName(item: DataSnapshot) {
-    let conv = <Conversation>item.toJSON();
-    return "TESTING";
-  }
-
-  public GetContent(item: DataSnapshot) {
-    return (<Conversation>item.toJSON()).lastMessage;
-  }
-
 
   AddConversation() {
     this.navCtrl.push("ContactListPage",{subject: this.callBack});

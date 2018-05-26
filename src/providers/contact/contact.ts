@@ -32,7 +32,7 @@ export class ContactProvider {
     return this.afDb.object<T>(number).valueChanges();
   }
 
-  AddContact(num: string,name: string) {
-    return this.afDb.object('0781431934/data/contacts/' + num + '/').set({name: name});
+  AddContact(author: Author) {
+    return this.afDb.object<Author>('0781431934/data/contacts/' + author.id + '/').set(author);
   }
 }

@@ -23,7 +23,7 @@ export class ContactListPage {
   public page: number;
   public onSelectionEvent: Subject<any>;
 
-  public contact$:  Observable<AngularFireAction<DataSnapshot>[]>;
+  public contact$:  Observable<Author[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public contactProvider: ContactProvider) {
     this.searchControl = new FormControl();
