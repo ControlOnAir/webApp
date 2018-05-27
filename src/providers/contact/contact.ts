@@ -20,7 +20,7 @@ export class ContactProvider {
       let authors: List<Author> = new List<Author>();
       data.forEach(datasnap => {
         let newAuthor: Author;
-        newAuthor = new Author(datasnap.payload["name"], datasnap.payload["number"]);
+        newAuthor = new Author(datasnap.payload.val().name, datasnap.payload.val().number);
         newAuthor.id = datasnap.key;
         authors.Add(newAuthor);
       });

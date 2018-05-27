@@ -17,7 +17,7 @@ export class MessageListPage {
 
   public page: number;
   public messageToSend: string;
-  public conversation: AngularFireAction<DataSnapshot>;
+  public conversation: Conversation;
   public messages: Message[]
   public convId: string;
 
@@ -25,8 +25,8 @@ export class MessageListPage {
     this.page = 0;
     this.conversation = navParams.get("conversation");
     if(this.conversation == null) this.navCtrl.pop();
-    this.messageProvider.loadMessages(this.conversation.key);
-    this.convId = this.conversation.key;
+    this.messageProvider.loadMessages(this.conversation.id);
+    this.convId = this.conversation.id;
     this.messageProvider.discussionMessages$.subscribe(data => {
       this.messages = data;
     });

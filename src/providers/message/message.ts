@@ -33,8 +33,8 @@ export class MessageProvider {
       let convlist = new List<Conversation>();
       data.forEach(datasnap => {
         let newconv = new Conversation();
-        newconv.lastMessage = datasnap.payload["lastMessage"];
-        newconv.timestamp = datasnap.payload["timestamp"];
+        newconv.lastMessage = datasnap.payload.val().lastMessage;
+        newconv.timestamp = datasnap.payload.val().timestamp;
         newconv.id = datasnap.key;
         convlist.Add(newconv);
       });
