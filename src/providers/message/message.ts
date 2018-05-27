@@ -39,7 +39,7 @@ export class MessageProvider {
         convlist.Add(newconv);
       });
       return convlist.ToArray();
-    })
+    });
   }
 
   public loadMessages(number: string) {
@@ -48,17 +48,19 @@ export class MessageProvider {
   }
 
   public GetConversationContact(number: string): Observable<Author> {
-    let res = this.afDb.object<any>("0781431934/data/contacts/" + number);
-    return res.snapshotChanges().map(data => {
-      let contact = new Author(data.payload["name"],data.payload["number"]);
+    return this.afDb.object<any>("0781431934/data/contacts/" + number).snapshotChanges().map(data => {
+      let contact = new Author(data.payload.val().name,data.payload.val().number);
       contact.id = data.key;
       return contact;
     }); 
   }
   
 
-  public AddNewMessage(dicussionId: Number, message: Message) {
+  public AddNewMessage(message: Message) {
     this.discussionMessages.push(message);
-    
+  }
+
+  public AddNewConversation(conv: Conversation) {
+    this.discussionListData.push(conv);
   }
 }

@@ -18,8 +18,6 @@ export class DiscussionListPage {
 
   public page: number;
 
-  public callBack: Subject<any>;
-
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public messageProvider: MessageProvider, public contactProvider: ContactProvider) {
     this.page = 0;
@@ -31,23 +29,23 @@ export class DiscussionListPage {
 
   public GetInitials(item: Conversation): Observable<any> {
     return new Observable(observer => {
-      this.contactProvider.GetOneContact<Author>("0781431934/data/contacts/" + item.id).subscribe(
+      this.contactProvider.GetOneContact("0781431934/data/contacts/" + item.id).subscribe(
         data => {
           observer.next(data.name[0] + data.name.slice(-1));
           observer.complete();
         }
-      )
+      );
     });
   }
   
   public GetContactName(item: Conversation): Observable<any> {
     return new Observable(observer => {
-      this.contactProvider.GetOneContact<Author>("0781431934/data/contacts/" + item.id).subscribe(
+      this.contactProvider.GetOneContact("0781431934/data/contacts/" + item.id).subscribe(
         data => {
           observer.next(data.name);
           observer.complete();
         }
-      )
+      );
     });
   }
 
@@ -57,6 +55,6 @@ export class DiscussionListPage {
   }
 
   AddConversation() {
-    this.navCtrl.push("ContactListPage",{subject: this.callBack});
+    this.navCtrl.push("ContactListPage",{isNewConversation: true});
   }
 }

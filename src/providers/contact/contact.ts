@@ -25,11 +25,11 @@ export class ContactProvider {
         authors.Add(newAuthor);
       });
       return authors.ToArray();
-    })
+    });
   }
 
-  GetOneContact<T>(number: string) {
-    return this.afDb.object<T>(number).valueChanges();
+  GetOneContact(number: string)  {
+    return this.afDb.object<Author>(number).valueChanges();
   }
 
   AddContact(author: Author) {

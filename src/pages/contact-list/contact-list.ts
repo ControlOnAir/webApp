@@ -1,3 +1,5 @@
+import { MessageProvider } from './../../providers/message/message';
+import { Conversation } from './../../models/Conversation';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
@@ -8,6 +10,7 @@ import { DataSnapshot } from '@firebase/database-types';
 import { AngularFireAction } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import moment, { Moment } from "moment";
 
 @IonicPage()
 @Component({
@@ -21,17 +24,17 @@ export class ContactListPage {
   public searching: boolean
   public shouldShowCancel: boolean;
   public page: number;
-  public onSelectionEvent: Subject<any>;
+  public isNewConv: boolean;
 
   public contact$:  Observable<Author[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public contactProvider: ContactProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public contactProvider: ContactProvider, public convProvider: MessageProvider) {
     this.searchControl = new FormControl();
     this.searching = false;
     this.shouldShowCancel = false;
     this.page = 0;
     this.contact$ = contactProvider.contactList$;
-    this.onSelectionEvent = this.navParams.get("subject");
+    this.isNewConv = this.navParams.get("isNewConversation");
   }
   
   ionViewDidLoad() {
@@ -55,10 +58,15 @@ export class ContactListPage {
     this.page++;
   }
 
-  onItemClick(item: AngularFireAction<DataSnapshot>) {
-    if(this.onSelectionEvent != null) {
-      this.onSelectionEvent.next(item);
-      this.navCtrl.pop();
+  onItemClick(item: Author) {
+    if(this.isNewConv != null) {
+      let newConv = new Conversation();
+      newConv.id = item.number;
+      newConv.lastMessage = "";
+      newConv.timestamp = moment();
+      this.convProvider.AddNewConversation(newConv);
+      this.navCtrl.setRoot("DiscussionListPage");
+      this.navCtrl.push("MessageListPage", { conversation: item });
     } 
   }
 }
