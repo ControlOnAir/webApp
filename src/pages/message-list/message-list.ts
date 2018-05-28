@@ -25,14 +25,17 @@ export class MessageListPage {
     this.page = 0;
     this.conversation = navParams.get("conversation");
     if(this.conversation == null) this.navCtrl.pop();
-    this.messageProvider.loadMessages(this.conversation.id);
-    this.convId = this.conversation.id;
-    this.messageProvider.discussionMessages$.subscribe(data => {
-      this.messages = data;
-    });
+    
   }
 
   ionViewDidLoad() {
+    if(this.conversation != null) {
+      this.messageProvider.loadMessages(this.conversation.id);
+      this.convId = this.conversation.id;
+      this.messageProvider.discussionMessages$.subscribe(data => {
+        this.messages = data;
+      });
+    }
   }
 
   sendMessage() {

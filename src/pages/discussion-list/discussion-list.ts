@@ -27,26 +27,14 @@ export class DiscussionListPage {
   }
 
 
-  public GetInitials(item: Conversation): Observable<any> {
-    return new Observable(observer => {
-      this.contactProvider.GetOneContact("0781431934/data/contacts/" + item.id).subscribe(
-        data => {
-          observer.next(data.name[0] + data.name.slice(-1));
-          observer.complete();
-        }
-      );
-    });
+  public GetInitials(item: Conversation): Observable<string> {
+    return this.contactProvider.GetOneContact("0781431934/data/contacts/" + item.id)
+    .map(x => { return x.name[0] + x.name.slice(-1); });
   }
   
   public GetContactName(item: Conversation): Observable<any> {
-    return new Observable(observer => {
-      this.contactProvider.GetOneContact("0781431934/data/contacts/" + item.id).subscribe(
-        data => {
-          observer.next(data.name);
-          observer.complete();
-        }
-      );
-    });
+      return this.contactProvider.GetOneContact("0781431934/data/contacts/" + item.id)
+      .map(x => { return x.name; })
   }
 
 
