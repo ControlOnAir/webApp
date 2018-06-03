@@ -58,7 +58,7 @@ export class ContactListPage {
     this.page++;
   }
 
-  onItemClick(item: Author) {
+  contactClick(item: Author) {
     if(this.isNewConv != null) {
       let newConv = new Conversation();
       newConv.id = item.number;
@@ -67,6 +67,8 @@ export class ContactListPage {
       this.convProvider.AddNewConversation(newConv);
       this.navCtrl.setRoot("DiscussionListPage");
       this.navCtrl.push("MessageListPage", { conversation: item });
-    } 
+    } else {
+      this.navCtrl.push("ContactDetailsPage", {contact: item});
+    }
   }
 }

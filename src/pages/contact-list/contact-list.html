@@ -19,5 +19,13 @@
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
-  <contact-list [ItemClick]="onItemClick"></contact-list>
+  <ion-list>
+    <ion-item *ngFor="let item of contactProvider.contactList$ | async" (click)="contactClick(item)">
+      <p>{{ item.name }}</p>
+      <p>{{ item.number }}</p>
+    </ion-item>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
 </ion-content>

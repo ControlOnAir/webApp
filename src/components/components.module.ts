@@ -1,12 +1,9 @@
 import { IonicModule } from 'ionic-angular';
 import { NgModule } from '@angular/core';
 import { ChatBubbleComponent } from './chat-bubble/chat-bubble';
-import { ContactListComponent } from './contact-list/contact-list';
 @NgModule({
-	declarations: [ChatBubbleComponent,
-    ContactListComponent],
+	declarations: [ChatBubbleComponent],
 	imports: [IonicModule],
-	exports: [ChatBubbleComponent,
-    ContactListComponent]
+	exports: [ChatBubbleComponent]
 })
 export class ComponentsModule {}

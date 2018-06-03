@@ -35,4 +35,12 @@ export class ContactProvider {
   AddContact(author: Author) {
     return this.afDb.object<Author>('0781431934/data/contacts/' + author.id + '/').set(author);
   }
+
+  ModifyContact(author: Author) {
+    return this.contactList.set(author.id, author);
+  }
+
+  DeleteContact(author: Author) {
+    return this.contactList.remove(author.id);
+  }
 }

@@ -11,11 +11,15 @@
   <ion-list>
     <ion-item>
       <ion-label fixed>Nom</ion-label>
-      <ion-input readonly [(ngModel)]="contactShown.name"></ion-input>
+      <ion-input [(ngModel)]="contactShown.name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label fixed>Numéro de portable</ion-label>
-      <ion-input type="tel" readonly [(ngModel)]="contactShown.number"></ion-input>
+      <ion-input type="tel" [(ngModel)]="contactShown.number"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>
+<ion-footer>
+  <button ion-button color="positive" full (click)="Modify()">Modifier</button>
+  <button ion-button color="danger" full (click)="Delete()">supprimer</button>
+</ion-footer>
