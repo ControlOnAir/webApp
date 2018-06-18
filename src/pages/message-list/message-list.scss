@@ -13,4 +13,17 @@ page-message-list {
     font-size: 17px;
     margin: auto;
   }
+
+  background-color: #dfdfdf; 
+  background-image: linear-gradient(to bottom, #dddbd1, #d2dbdc);
+}
+
+ion-footer {
+  width: 60%;
+  margin-left: 20%; 
+}
+
+ion-searchbar {
+  width: 60%;
+  margin-left: 20%; 
 }

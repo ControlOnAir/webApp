@@ -9,9 +9,13 @@ page-contact-list {
         bottom:40px;
     }
 
+    background-color: #dfdfdf; 
+    background-image: linear-gradient(to bottom, #dddbd1, #d2dbdc);
+
 }
 
 ion-content {
-    padding-left: 30% !important;
-    padding-right: 30% !important;
+    margin-left: 20% !important;
+    margin-right: 20% !important;
+    width: 60% !important;
 }

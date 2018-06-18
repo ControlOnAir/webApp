@@ -34,7 +34,7 @@ export class DiscussionListPage {
   
   public GetContactName(item: Conversation): Observable<any> {
       return this.contactProvider.GetOneContact("0781431934/data/contacts/" + item.id)
-      .map(x => { return x.name; })
+      .map(x => { return x.name; });
   }
 
 
