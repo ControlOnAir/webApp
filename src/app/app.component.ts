@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -11,13 +12,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = "DiscussionListPage";
+  rootPage: any = "TokenValidationPage";
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public storage: Storage) {
     this.initializeApp();
 
+    storage.get("hasValidatedToken").then(x => {
+      if(x == true) this.nav.setRoot("DiscussionListPage");
+    });
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Messages', component: "DiscussionListPage" },

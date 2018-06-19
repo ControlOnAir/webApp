@@ -16,6 +16,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { TokenProvider } from '../providers/token/token';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -38,7 +41,8 @@ import { environment } from '../environments/environment';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MessageProvider,
-    ContactProvider
+    ContactProvider,
+    TokenProvider
   ]
 })
 export class AppModule {}

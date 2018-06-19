@@ -6,5 +6,20 @@
 
 
 <ion-content padding>
-
+  <ion-grid>
+    <ion-row>
+    </ion-row>
+    <ion-row>
+        <ion-item>
+            <ion-label color="primary" stacked>numéro de téléphone</ion-label>
+            <input type="text" required [(ngModel)]="phoneNumber" />
+          </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>token</ion-label>
+        <input type="text" required [(ngModel)]="tokenInputValue" />
+      </ion-item>
+    </ion-row>
+    <ion-row>
+    </ion-row>
+  </ion-grid>
 </ion-content>
