@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -14,16 +15,19 @@ export class TokenProvider {
   }
 
   public ValidateCredentials(phone: string, token: string) {
-    return this.afDb.object(phone + "/token/").valueChanges().subscribe(value => {
+    var t = new Subject();
+    this.afDb.object(phone + "/token/").valueChanges().subscribe(value => {
       if(value == token) {
         return this.storage.set("hasValidatedToken", true).then(x => {
-          return true;
+          t.next(true);
+          this.afDb.object(phone + "/token/").set("");
         })
       } else {
         //show an error message and let the user try again
-        return false;
+        t.next(false);
       }
     });
+    return t;
   }
 
 }
