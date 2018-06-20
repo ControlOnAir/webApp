@@ -61,6 +61,6 @@ export class MessageProvider {
   }
 
   public AddNewConversation(conv: Conversation) {
-    this.discussionListData.push(conv);
+    return this.afDb.object<Conversation>('0781431934/data/conversations/' + conv.id + '/').set(conv);
   }
 }

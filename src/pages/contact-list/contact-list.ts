@@ -63,7 +63,7 @@ export class ContactListPage {
       let newConv = new Conversation();
       newConv.id = item.number;
       newConv.lastMessage = "";
-      newConv.timestamp = moment();
+      newConv.timestamp = moment().toJSON();
       this.convProvider.AddNewConversation(newConv);
       this.navCtrl.setRoot("DiscussionListPage");
       this.navCtrl.push("MessageListPage", { conversation: item });

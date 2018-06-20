@@ -5,12 +5,12 @@ import moment, { Moment } from "moment";
 export class Conversation {
     //id = phone number
     public id: string;
-    public timestamp: Moment;
+    public timestamp: string;
     public lastMessage: string;
 
     constructor() {
         this.id = "";
-        this.timestamp = moment();
+        this.timestamp = moment().toJSON();
         this.lastMessage = "";
     }
 }

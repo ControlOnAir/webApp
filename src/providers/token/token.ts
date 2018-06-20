@@ -18,10 +18,10 @@ export class TokenProvider {
     var t = new Subject();
     this.afDb.object(phone + "/token/").valueChanges().subscribe(value => {
       if(value == token) {
-        return this.storage.set("hasValidatedToken", true).then(x => {
+        //return this.storage.set("hasValidatedToken", true).then(x => {
           t.next(true);
-          this.afDb.object(phone + "/token/").set("");
-        })
+          this.afDb.object(phone + "/token/").set({});
+        //});
       } else {
         //show an error message and let the user try again
         t.next(false);
