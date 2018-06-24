@@ -20,7 +20,6 @@ export class TokenValidationPage {
   }
 
   public CheckToken() {
-    console.log(this.phoneNumber);
     this.tokenService.ValidateCredentials(this.phoneNumber, this.tokenInputValue).subscribe(value => {
       if(value) this.navCtrl.setRoot("DiscussionListPage");
     });

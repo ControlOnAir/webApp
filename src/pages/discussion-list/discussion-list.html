@@ -21,7 +21,7 @@
         </div>
       </ion-avatar>
       <h2>{{ GetContactName(item) | async }}</h2>
-      <p>{{ item.lastMessage }}</p>
+      <p>{{ item.lastMessage? item.lastMessage : "" }}</p>
     </ion-item>
   </ion-list>
 </ion-content>
