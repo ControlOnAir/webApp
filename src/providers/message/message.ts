@@ -32,10 +32,11 @@ export class MessageProvider {
     this.dicussionListData$ = this.discussionListData.snapshotChanges().map(data => {
       let convlist = new List<Conversation>();
       data.forEach(datasnap => {
+        console.log(datasnap);
         let newconv = new Conversation();
+        newconv.id = datasnap.key;
         newconv.lastMessage = datasnap.payload.val().lastMessage;
         newconv.timestamp = datasnap.payload.val().timestamp;
-        newconv.id = datasnap.key;
         convlist.Add(newconv);
       });
       return convlist.ToArray();
@@ -52,7 +53,7 @@ export class MessageProvider {
       let contact = new Author(data.payload.val().name,data.payload.val().number);
       contact.id = data.key;
       return contact;
-    }); 
+    });
   }
   
 
