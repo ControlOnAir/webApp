@@ -3,24 +3,26 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { Author } from '../../models/Author';
+import { Contact } from '../../models/Contact';
 import { AngularFireList, AngularFireAction, AngularFireDatabase } from 'angularfire2/database';
 import { DataSnapshot } from '@firebase/database-types';
+import { TokenProvider } from '../token/token';
 
 @Injectable()
 export class ContactProvider {
 
-  public contactList$: Observable<Author[]>;
-  private contactList: AngularFireList<Author>;
+  public contactList$: Observable<Contact[]>;
+  private contactList: AngularFireList<Contact>;
 
 
-  constructor(public afDb: AngularFireDatabase) {
-    this.contactList = afDb.list<Author>('0781431934/data/contacts');
+  constructor(public afDb: AngularFireDatabase, public tokenP: TokenProvider) {
+    this.contactList = afDb.list<Contact>(tokenP.UID + '/contacts');
     this.contactList$ = this.contactList.snapshotChanges().map((data) => {
-      let authors: List<Author> = new List<Author>();
+      console.log(data);
+      let authors: List<Contact> = new List<Contact>();
       data.forEach(datasnap => {
-        let newAuthor: Author;
-        newAuthor = new Author(datasnap.payload.val().name, datasnap.payload.val().number);
+        let newAuthor: Contact;
+        newAuthor = new Contact(datasnap.payload.val().name, datasnap.payload.val().number);
         newAuthor.id = datasnap.key;
         authors.Add(newAuthor);
       });
@@ -29,18 +31,18 @@ export class ContactProvider {
   }
 
   GetOneContact(number: string)  {
-    return this.afDb.object<Author>(number).valueChanges();
+    return this.afDb.object<Contact>(number).valueChanges();
   }
 
-  AddContact(author: Author) {
-    return this.afDb.object<Author>('0781431934/data/contacts/' + author.id + '/').set(author);
+  AddContact(author: Contact) {
+    return this.afDb.object<Contact>(this.tokenP.UID + '/contacts/' + author.id + '/').set(author);
   }
 
-  ModifyContact(author: Author) {
+  ModifyContact(author: Contact) {
     return this.contactList.set(author.id, author);
   }
 
-  DeleteContact(author: Author) {
+  DeleteContact(author: Contact) {
     return this.contactList.remove(author.id);
   }
 }

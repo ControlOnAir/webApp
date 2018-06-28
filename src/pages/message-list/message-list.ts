@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MessageBubble } from '../../models/MessageBubble';
 import { Message } from '../../models/Message';
-import { Author } from '../../models/Author';
-import { Conversation } from '../../models/Conversation';
+import { Contact } from '../../models/Contact';
+import { IConversation } from '../../models/Conversation';
 import { DataSnapshot } from '@firebase/database-types';
 import { AngularFireAction } from 'angularfire2/database';
 
@@ -17,9 +17,9 @@ export class MessageListPage {
 
   public page: number;
   public messageToSend: string;
-  public conversation: Conversation;
+  public conversation: IConversation;
   public messages: Message[]
-  public convId: string;
+  public convId: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
     this.page = 0;

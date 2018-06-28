@@ -1,7 +1,7 @@
 import { ContactProvider } from './../../providers/contact/contact';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Author } from '../../models/Author';
+import { Contact } from '../../models/Contact';
 
 @IonicPage()
 @Component({
@@ -10,10 +10,10 @@ import { Author } from '../../models/Author';
 })
 export class ContactAddPage {
 
-  public newContact: Author;
+  public newContact: Contact;
 
   constructor(public navCtrl: NavController, public contactProvider: ContactProvider) {
-    this.newContact = new Author("","");
+    this.newContact = new Contact("","");
   }
 
   ionViewDidLoad() {
@@ -21,7 +21,7 @@ export class ContactAddPage {
   }
 
   AddContact() {
-    let newAuthor = new Author(this.newContact.name, this.newContact.number);
+    let newAuthor = new Contact(this.newContact.name, this.newContact.number);
     newAuthor.id = this.newContact.number;
     this.contactProvider.AddContact(newAuthor).then(data => {
       this.navCtrl.pop();

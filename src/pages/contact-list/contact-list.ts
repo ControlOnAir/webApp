@@ -1,11 +1,11 @@
 import { MessageProvider } from './../../providers/message/message';
-import { Conversation } from './../../models/Conversation';
+import { IConversation } from './../../models/Conversation';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
 import "rxjs/add/operator/debounceTime";
 import { ContactProvider } from '../../providers/contact/contact';
-import { Author } from '../../models/Author';
+import { Contact } from '../../models/Contact';
 import { DataSnapshot } from '@firebase/database-types';
 import { AngularFireAction } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -26,7 +26,7 @@ export class ContactListPage {
   public page: number;
   public isNewConv: boolean;
 
-  public contact$:  Observable<Author[]>;
+  public contact$: Observable<Contact[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public contactProvider: ContactProvider, public convProvider: MessageProvider) {
     this.searchControl = new FormControl();
@@ -36,7 +36,7 @@ export class ContactListPage {
     this.contact$ = contactProvider.contactList$;
     this.isNewConv = this.navParams.get("isNewConversation");
   }
-  
+
   ionViewDidLoad() {
     //we wait for no change in the last 500ms to execute result filter
     this.searchControl.valueChanges.debounceTime(500).subscribe((search) => {
@@ -51,24 +51,25 @@ export class ContactListPage {
   }
 
   public AddContact() {
-    this.navCtrl.push("ContactAddPage",{contact: null});
+    this.navCtrl.push("ContactAddPage", { contact: null });
   }
 
   doInfinite(event) {
     this.page++;
   }
 
-  contactClick(item: Author) {
-    if(this.isNewConv != null) {
-      let newConv = new Conversation();
-      newConv.id = item.number;
-      newConv.lastMessage = "";
-      newConv.timestamp = moment().toJSON();
+  contactClick(item: Contact) {
+    if (this.isNewConv != null) {
+      let newConv: IConversation = {
+        contact: item, 
+        id: -1, 
+        timestamp: new Date().valueOf()
+      };
       this.convProvider.AddNewConversation(newConv);
       this.navCtrl.setRoot("DiscussionListPage");
       this.navCtrl.push("MessageListPage", { conversation: item });
     } else {
-      this.navCtrl.push("ContactDetailsPage", {contact: item});
+      this.navCtrl.push("ContactDetailsPage", { contact: item });
     }
   }
 }

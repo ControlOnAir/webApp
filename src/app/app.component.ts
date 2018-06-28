@@ -18,10 +18,6 @@ export class MyApp {
 
   constructor(public platform: Platform, public storage: Storage) {
     this.initializeApp();
-
-    storage.get("hasValidatedToken").then(x => {
-      if(x == true) this.nav.setRoot("DiscussionListPage");
-    });
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Messages', component: "DiscussionListPage" },

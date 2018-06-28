@@ -1,5 +1,5 @@
 import { ContactProvider } from './../../providers/contact/contact';
-import { Author } from './../../models/Author';
+import { Contact } from '../../models/Contact';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
@@ -10,7 +10,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 })
 export class ContactDetailsPage {
 
-  public contactShown: Author;
+  public contactShown: Contact;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public contactProvider: ContactProvider,
     public toastController: ToastController) {

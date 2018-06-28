@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MessageBubble } from '../../models/MessageBubble';
 import { Message } from '../../models/Message';
-import { Author } from '../../models/Author';
+import { Contact } from '../../models/Contact';
 import moment, { Moment } from "moment";
 import { AngularFireAction } from 'angularfire2/database';
 import { DataSnapshot } from '@firebase/database-types';
@@ -21,13 +21,13 @@ export class ChatBubbleComponent {
 
   ngOnInit() {
     let direction = "left";
-    if(this.message.author == "moi") direction = "right";
+    if(this.message.author.name == "moi") direction = "right";
     this.bubble = new MessageBubble("",direction, this.message);
     //temporaire
-    if(this.bubble.message.timestamp == null) this.bubble.message.timestamp = moment().format("HH:mm dd/MM/YYYY");
+    if(this.bubble.message.timestamp == null) this.bubble.message.timestamp = new Date().valueOf();
   }
 
   public GetInitials(): string {
-    return this.bubble.message.author[0] + this.bubble.message.author.slice(-1);
+    return this.bubble.message.author.name[0] + this.bubble.message.author.name.slice(-1);
   }
 }
