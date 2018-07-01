@@ -29,17 +29,8 @@ export class MessageProvider {
     this.discussionMessages = afDb.list<Message>( tokenP.UID + '/messages');
     this.discussionMessages$ = this.discussionMessages.valueChanges();
 
-    this.discussionListData = afDb.list<any>(tokenP.UID + '/conversations');
-    this.dicussionListData$ = this.discussionListData.snapshotChanges().map(data => {
-      console.log(data);
-      let convlist = new List<IConversation>();
-      data.forEach(datasnap => {
-        let newconv = Convert.toConversation(datasnap.payload.val());
-        newconv.id = parseInt(datasnap.key);
-        convlist.Add(newconv);
-      });
-      return convlist.ToArray();
-    });
+    this.discussionListData = afDb.list<IConversation>(tokenP.UID + '/conversations');
+    this.dicussionListData$ = this.discussionListData.valueChanges();
   }
 
   public loadMessages(number: number) {

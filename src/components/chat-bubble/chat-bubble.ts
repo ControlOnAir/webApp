@@ -28,6 +28,7 @@ export class ChatBubbleComponent {
   }
 
   public GetInitials(): string {
+    if(!this.bubble.message.author.name) return;
     return this.bubble.message.author.name[0] + this.bubble.message.author.name.slice(-1);
   }
 }

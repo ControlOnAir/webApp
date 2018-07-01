@@ -19,7 +19,7 @@ export class MessageListPage {
   public messageToSend: string;
   public conversation: IConversation;
   public messages: Message[]
-  public convId: number;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
     this.page = 0;
@@ -31,7 +31,6 @@ export class MessageListPage {
   ionViewDidLoad() {
     if(this.conversation != null) {
       this.messageProvider.loadMessages(this.conversation.id);
-      this.convId = this.conversation.id;
       this.messageProvider.discussionMessages$.subscribe(data => {
         this.messages = data;
       });
