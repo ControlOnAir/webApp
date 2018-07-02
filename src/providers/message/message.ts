@@ -35,7 +35,13 @@ export class MessageProvider {
 
   public loadMessages(number: number) {
     this.discussionMessages = this.afDb.list<Message>(this.tokenP.UID + '/messages/' + number);
-    this.discussionMessages$ = this.discussionMessages.valueChanges();
+    this.discussionMessages$ = this.discussionMessages.snapshotChanges().map(val => {
+      let arr = [];
+      val.forEach(x => {
+        arr.push(Convert.toConversation(x.payload.val()));
+      });
+      return arr;
+    });
   }
 
   public GetConversationContact(number: string): Observable<Contact> {
@@ -43,7 +49,7 @@ export class MessageProvider {
       let contact = new Contact(data.payload.val().name,data.payload.val().number);
       contact.id = data.key;
       return contact;
-    }); 
+    });
   }
   
 
