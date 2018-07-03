@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { IConversation } from '../../models/Conversation';
 import { Subject } from 'rxjs/Subject';
+import { TokenProvider } from '../../providers/token/token';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,7 @@ export class DiscussionListPage {
   public page: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public messageProvider: MessageProvider, public contactProvider: ContactProvider) {
+    public messageProvider: MessageProvider, public contactProvider: ContactProvider, public tokenP: TokenProvider) {
     this.page = 0;
   }
 
@@ -28,12 +29,12 @@ export class DiscussionListPage {
 
 
   public GetInitials(item: IConversation): Observable<string> {
-    return this.contactProvider.GetOneContact("0781431934/data/contacts/" + item.id)
+    return this.contactProvider.GetOneContact(this.tokenP.UID + "/contacts/" + item.id)
     .map(x => { return x.name[0] + x.name.slice(-1); });
   }
   
   public GetContactName(item: IConversation): Observable<any> {
-      return this.contactProvider.GetOneContact("0781431934/data/contacts/" + item.id)
+      return this.contactProvider.GetOneContact(this.tokenP.UID + "/contacts/" + item.id)
       .map(x => { return x.name; });
   }
 

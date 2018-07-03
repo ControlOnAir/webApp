@@ -15,27 +15,20 @@ import { AngularFireAction } from 'angularfire2/database';
 })
 export class MessageListPage {
 
-  public page: number;
   public messageToSend: string;
   public conversation: IConversation;
   public messages: Message[]
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
-    this.page = 0;
     this.conversation = navParams.get("conversation");
     if (this.conversation == null) this.navCtrl.pop();
-    else {
-      this.messageProvider.loadMessages(this.conversation.id);
-      this.messageProvider.discussionMessages$.subscribe(data => {
-        this.messages = data;
-      });
-    }
-
+    this.messageProvider.loadMessages(this.conversation.id);
   }
 
   sendMessage() {
     let msg = new MessageBubble("", "right", new Message("moi", this.messageToSend));
+    console.log(msg);
     this.messageProvider.AddNewMessage(msg.message);
     this.messageToSend = "";
   }

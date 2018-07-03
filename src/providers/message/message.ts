@@ -21,10 +21,6 @@ export class MessageProvider {
   public discussionMessages$: Observable<Message[]>;
   private discussionMessages: AngularFireList<Message>;
 
-
-  //used for mocking purpose only
-  private fresult: MessageBubble[];
-
   constructor(public afDb: AngularFireDatabase, public tokenP: TokenProvider) {
     this.discussionMessages = afDb.list<Message>( tokenP.UID + '/messages');
     this.discussionMessages$ = this.discussionMessages.valueChanges();
@@ -34,12 +30,13 @@ export class MessageProvider {
   }
 
   public loadMessages(number: number) {
+    console.log(number);
     this.discussionMessages = this.afDb.list<Message>(this.tokenP.UID + '/messages/' + number);
     this.discussionMessages$ = this.discussionMessages.valueChanges();
   }
 
   public GetConversationContact(number: string): Observable<Contact> {
-    return this.afDb.object<any>(this.tokenP.UID + "/contacts/" + number).snapshotChanges().map(data => {
+    return this.afDb.object<any>(this.tokenP.UID + '/contacts/' + number).snapshotChanges().map(data => {
       let contact = new Contact(data.payload.val().name,data.payload.val().number);
       contact.id = data.key;
       return contact;

@@ -8,6 +8,9 @@ export class Message implements IMessage {
 
     constructor(number: string, body: string) {
         this.author = {number: number, name: ""};
+        this.body = body;
+        this.sent = false;
+        this.timestamp = new Date().valueOf();
     }
 }
 

@@ -17,14 +17,19 @@ export class ChatBubbleComponent {
   public bubble: MessageBubble;
 
   constructor() {
-  }
-
-  ngOnInit() {
+    console.log(this.message);
     let direction = "left";
     if(this.message.author.name == "moi") direction = "right";
     this.bubble = new MessageBubble("",direction, this.message);
     //temporaire
     if(this.bubble.message.timestamp == null) this.bubble.message.timestamp = new Date().valueOf();
+  }
+
+  ngOnInit() {
+  }
+
+  toMoment(num: Number): string {
+    return moment().format();
   }
 
   public GetInitials(): string {
