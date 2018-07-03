@@ -24,21 +24,18 @@ export class MessageListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
     this.page = 0;
     this.conversation = navParams.get("conversation");
-    if(this.conversation == null) this.navCtrl.pop();
-    
-  }
-
-  ionViewDidLoad() {
-    if(this.conversation != null) {
+    if (this.conversation == null) this.navCtrl.pop();
+    else {
       this.messageProvider.loadMessages(this.conversation.id);
       this.messageProvider.discussionMessages$.subscribe(data => {
         this.messages = data;
       });
     }
+
   }
 
   sendMessage() {
-    let msg = new MessageBubble("","right", new Message("moi",this.messageToSend));
+    let msg = new MessageBubble("", "right", new Message("moi", this.messageToSend));
     this.messageProvider.AddNewMessage(msg.message);
     this.messageToSend = "";
   }
