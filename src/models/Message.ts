@@ -29,7 +29,7 @@ export interface Author {
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
-export namespace Convert {
+export namespace MessageConvert {
     export function toIMessage(json: string): { [key: string]: IMessage } {
         return cast(JSON.parse(json), m(r("IMessage")));
     }

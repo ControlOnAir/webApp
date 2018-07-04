@@ -10,7 +10,7 @@ export interface IContact {
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
-export namespace Convert {
+export namespace ConversationConvert {
     export function toConversation(json: string): IConversation {
         return cast(JSON.parse(json), r("Conversation"));
     }

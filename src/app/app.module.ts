@@ -1,5 +1,4 @@
 import { DiscussionListPage } from './../pages/discussion-list/discussion-list';
-import { ComponentsModule } from './../components/components.module';
 import { MessageListPage } from './../pages/message-list/message-list';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';

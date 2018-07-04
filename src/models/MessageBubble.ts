@@ -1,7 +1,7 @@
 import { Message } from './Message';
 export class MessageBubble {
     img: string;
-    position: string;
+    position: string = "left";
     message: Message;
 
     constructor(img: string, position: string, message: Message) {

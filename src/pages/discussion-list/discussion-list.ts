@@ -30,7 +30,10 @@ export class DiscussionListPage {
 
   public GetInitials(item: IConversation): Observable<string> {
     return this.contactProvider.GetOneContact(this.tokenP.UID + "/contacts/" + item.id)
-    .map(x => { return x.name[0] + x.name.slice(-1); });
+    .map(x => {  
+      if(x == null) return '';
+      return x.name[0] + x.name.slice(-1); 
+    });
   }
   
   public GetContactName(item: IConversation): Observable<any> {

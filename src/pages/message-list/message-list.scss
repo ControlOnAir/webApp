@@ -5,7 +5,6 @@ page-message-list {
     background: white;
     border-radius: 3px;
   }
-
   .message-editor-button {
     box-shadow: none;
     width: 50px;
@@ -13,17 +12,102 @@ page-message-list {
     font-size: 17px;
     margin: auto;
   }
-
-  background-color: #dfdfdf; 
+  background-color: #dfdfdf;
   background-image: linear-gradient(to bottom, #dddbd1, #d2dbdc);
+  .chatBubble {
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 10px;
+    }
+    .profile-pic.left {
+      left: 10px;
+    }
+    .profile-pic.right {
+      right: 10px;
+    }
+    .message {
+      font-size: medium;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+    .message-detail {
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    .chat-bubble {
+      border-radius: 5px;
+      display: inline-block;
+      padding: 10px 18px;
+      position: relative;
+      margin: 10px;
+      max-width: 80%;
+    }
+    .chat-bubble:before {
+      content: "\00a0";
+      display: block;
+      height: 16px;
+      width: 9px;
+      position: absolute;
+      bottom: -7.5px;
+    }
+    .chat-bubble.left {
+      background-color: map-get($chat-bubble, background-left);
+      float: left;
+      margin-left: 20%;
+    }
+    .chat-bubble.left:before {
+      background-color: map-get($chat-bubble, background-left);
+      left: 10px;
+      -webkit-transform: rotate(70deg) skew(5deg);
+    }
+    .chat-bubble.right {
+      background-color: map-get($chat-bubble, background-right);
+      color: #000;
+      float: right;
+      margin-right: 20%;
+    }
+    .chat-bubble.right:before {
+      background-color: map-get($chat-bubble, background-right);
+      right: 10px;
+      -webkit-transform: rotate(118deg) skew(-5deg);
+    }
+    .chat-bubble.right a.autolinker {
+      color: #000;
+      font-weight: bold;
+    }
+  }
+  .avatar-circle {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(24, 85, 214, 0.781);
+    text-align: center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+  }
+  .initials {
+    position: relative;
+    top: 12px;
+    /* 25% of parent */
+    font-size: 25px;
+    /* 50% of parent */
+    line-height: 25px;
+    /* 50% of parent */
+    color: #fff;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+  }
 }
 
 ion-footer {
   width: 60%;
-  margin-left: 20%; 
+  margin-left: 20%;
 }
 
 ion-searchbar {
   width: 60%;
-  margin-left: 20%; 
+  margin-left: 20%;
 }
