@@ -27,16 +27,17 @@ export class MessageProvider {
     this.dicussionListData$ = this.discussionListData.valueChanges();
   }
 
-  public loadMessages(number: number) {
+  public loadMessages(number: number): Observable<Message[]> {
     let refUrl = this.tokenP.UID + '/messages/' + number;
     console.log(refUrl);
     this.discussionMessages = this.afDb.list<Message>(refUrl);
-    this.discussionMessages$ = this.discussionMessages.snapshotChanges().map(data => {
+    return this.discussionMessages$ = this.discussionMessages.snapshotChanges().map(data => {
       let res = [];
       data.forEach(element => {
         res.push(element.payload.val());
       });
-      console.log(res);
+      let message = new List<Message>(res);
+      message = message.OrderBy(x => x.id);
       return res;
     });
   }

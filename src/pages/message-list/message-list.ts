@@ -8,6 +8,7 @@ import { IConversation } from '../../models/Conversation';
 import { DataSnapshot } from '@firebase/database-types';
 import { AngularFireAction } from 'angularfire2/database';
 import moment, { Moment } from "moment";
+import { List } from '../../../node_modules/linqts';
 
 @IonicPage()
 @Component({
@@ -18,18 +19,26 @@ export class MessageListPage {
 
   public messageToSend: string;
   public conversation: IConversation;
-  public messages: Message[]
+  public messages: Message[];
+  public nextId: number;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
+    this.messages = [];
+    this.nextId = -1;
     this.conversation = navParams.get("conversation");
     if (this.conversation == null) this.navCtrl.pop();
-    this.messageProvider.loadMessages(this.conversation.id);
+    let unsub = this.messageProvider.loadMessages(this.conversation.id).subscribe(x => {
+      let l: List<Message> = new List<Message>(x).OrderBy(x => x.id);
+      this.nextId = l.Last().id + 1;
+      this.messages = l.ToArray();
+      unsub.unsubscribe();
+    });
   }
 
   sendMessage() {
     let msg = new MessageBubble("", "right", new Message("moi", this.messageToSend));
-    console.log(msg);
+    msg.message.id = this.nextId;
     this.messageProvider.AddNewMessage(msg.message);
     this.messageToSend = "";
   }
@@ -44,7 +53,7 @@ export class MessageListPage {
   }
  
    toMoment(num: Number): string {
-     return moment().format();
+     return "";
    }
 
    public GetInitials(msg: Message): string {
