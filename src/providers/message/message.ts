@@ -24,15 +24,23 @@ export class MessageProvider {
 
   constructor(public afDb: AngularFireDatabase, public tokenP: TokenProvider) {
     this.discussionListData = afDb.list<IConversation>(tokenP.UID + '/conversations');
-    this.dicussionListData$ = this.discussionListData.valueChanges();
+    this.dicussionListData$ = this.discussionListData.snapshotChanges().map(data => {
+      let convs: IConversation[] = [];
+      data.forEach(item => {
+        let conv = item.payload.val();
+        conv.id = item.key;
+        convs.push(conv);
+      });
+      return convs;
+    });
   }
 
-  public loadMessages(number: number): Observable<Message[]> {
-    let refUrl = this.tokenP.UID + '/messages/' + number;
-    console.log(refUrl);
+  public loadMessages(id: string) {
+    let refUrl = this.tokenP.UID + '/messages/' + id;
     this.discussionMessages = this.afDb.list<Message>(refUrl);
-    return this.discussionMessages$ = this.discussionMessages.snapshotChanges().map(data => {
+    this.discussionMessages$ = this.discussionMessages.snapshotChanges().map(data => {
       let res = [];
+      console.log(data);
       data.forEach(element => {
         res.push(element.payload.val());
       });

@@ -1,6 +1,6 @@
 export interface IConversation {
     contact:   IContact;
-    id:        number;
+    id:        string;
     timestamp: number;
 }
 
@@ -99,7 +99,7 @@ export namespace ConversationConvert {
     const typeMap: any = {
         "Conversation": o({
             contact: r("Contact"),
-            id: 0,
+            id: "",
             timestamp: 0,
         }, false),
         "Contact": o({

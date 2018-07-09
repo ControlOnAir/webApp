@@ -62,7 +62,7 @@ export class ContactListPage {
     if (this.isNewConv != null) {
       let newConv: IConversation = {
         contact: item, 
-        id: -1, 
+        id: "-1", 
         timestamp: new Date().valueOf()
       };
       this.convProvider.AddNewConversation(newConv);

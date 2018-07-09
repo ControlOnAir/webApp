@@ -6,7 +6,7 @@ import { DataSnapshot } from '@firebase/database-types';
 import { MessageProvider } from './../../providers/message/message';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { IConversation } from '../../models/Conversation';
+import { IConversation, ConversationConvert } from '../../models/Conversation';
 import { Subject } from 'rxjs/Subject';
 import { TokenProvider } from '../../providers/token/token';
 
@@ -25,6 +25,7 @@ export class DiscussionListPage {
   }
 
   ionViewDidLoad() {
+ 
   }
 
 

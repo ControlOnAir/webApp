@@ -9,15 +9,12 @@
 
 <ion-content padding>
   <ion-list no-lines>
-    <ion-item *ngFor="let msg of messages">
+    <ion-item *ngFor="let msg of messageProvider.discussionMessages$ | async ">
       <div class="chatBubble">
-        <div class="profile-pic {{GetPosition(msg)}}">
-          <span class="initials">{{ GetInitials(msg) }}</span>
-        </div>
         <div class="chat-bubble {{GetPosition(msg)}}">
           <div class="message">{{msg.body}}</div>
           <div class="message-detail">
-              <span style="font-weight:bold;">{{msg.author.name || msg.author.number}} </span>,
+              <span style="font-weight:bold;">{{msg.author.name ? msg.author.name : "Inconnu" }} </span>,
               <span>{{ toMoment(msg.timestamp)}}</span>
           </div>
         </div>

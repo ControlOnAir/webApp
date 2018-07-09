@@ -9,6 +9,7 @@ import { DataSnapshot } from '@firebase/database-types';
 import { AngularFireAction } from 'angularfire2/database';
 import moment, { Moment } from "moment";
 import { List } from '../../../node_modules/linqts';
+import { TokenProvider } from '../../providers/token/token';
 
 @IonicPage()
 @Component({
@@ -19,26 +20,19 @@ export class MessageListPage {
 
   public messageToSend: string;
   public conversation: IConversation;
-  public messages: Message[];
-  public nextId: number;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider) {
-    this.messages = [];
-    this.nextId = -1;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public messageProvider: MessageProvider,
+  public tokenP: TokenProvider) {
     this.conversation = navParams.get("conversation");
+    console.log(this.conversation);
     if (this.conversation == null) this.navCtrl.pop();
-    let unsub = this.messageProvider.loadMessages(this.conversation.id).subscribe(x => {
-      let l: List<Message> = new List<Message>(x).OrderBy(x => x.id);
-      this.nextId = l.Last().id + 1;
-      this.messages = l.ToArray();
-      unsub.unsubscribe();
-    });
+    this.messageProvider.loadMessages(this.conversation.id);
   }
 
   sendMessage() {
-    let msg = new MessageBubble("", "right", new Message("moi", this.messageToSend));
-    msg.message.id = this.nextId;
+    let msg = new MessageBubble("", "right", new Message(this.tokenP.UID, this.messageToSend));
+    msg.message.author.name = "moi";
     this.messageProvider.AddNewMessage(msg.message);
     this.messageToSend = "";
   }
@@ -49,16 +43,11 @@ export class MessageListPage {
   }
 
   public GetPosition(msg: Message) {
-    return "left";
+    if(msg.author.number != this.tokenP.UID) return "left";
+    else return "right";
   }
  
-   toMoment(num: Number): string {
-     return "";
+   toMoment(num: number): string {
+     return moment(num).format();
    }
-
-   public GetInitials(msg: Message): string {
-    if(!msg.author.name) return;
-    return msg.author.name[0] + msg.author.name.slice(-1);
-  }
-
 }
