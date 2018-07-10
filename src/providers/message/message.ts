@@ -44,9 +44,8 @@ export class MessageProvider {
       data.forEach(element => {
         res.push(element.payload.val());
       });
-      let message = new List<Message>(res);
-      message = message.OrderBy(x => x.id);
-      return res;
+      let ar = new List<Message>(res).OrderBy(x => x.timestamp);
+      return ar.ToArray();
     });
   }
 
